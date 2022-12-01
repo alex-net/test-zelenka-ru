@@ -1,0 +1,23 @@
+services:
+  php:
+    build:
+      dockerfile: ./php.docker
+      context: .
+    stdin_open: true
+    user: 1000:1000
+    volumes:
+      - ./utilite:/var/www/zelenka-ru
+    working_dir: /var/www/zelenka-ru
+    links:
+       - db
+  db:
+    image: mariadb:latest
+    volumes:
+      - db:/var/lib/mysql
+      - ./dumps:/dumps
+    working_dir: /dumps
+    environment:
+      MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: true
+
+volumes:
+  db:

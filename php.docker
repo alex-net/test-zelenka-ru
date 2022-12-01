@@ -1,0 +1,6 @@
+FROM php:7.4-alpine
+
+run wget https://getcomposer.org/installer && php installer && mv composer.phar /usr/local/bin/composer \
+    && docker-php-ext-install pdo_mysql
+
+#cmd ["php", "-a"]
